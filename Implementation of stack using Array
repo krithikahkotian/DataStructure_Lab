@@ -1,0 +1,62 @@
+#include<stdio.h>
+#define STACK_SIZE 10
+void push(int *top,int stck[],int item)
+{
+    if(*top==STACK_SIZE-1)
+    {
+        printf("Stack is Full! Stack Overflow\n");
+        return;
+    }
+    stck[++(*top)]=item;
+}
+int pop (int *top,int stck[])
+{
+    if(*top==-1)
+    {
+        printf("Stack is Empty! Stack Underflow\n");
+        return -1;
+    }
+    return stck[(*top)--];
+}
+void display(int *top,int stck[])
+{
+    if (*top==-1)
+    {
+        printf("Stack is empty! Can't Dispaly\n");
+        return;
+    }
+    printf("Stack Elements are: \n");
+    for(int i=0;i<=*top;i++)
+    {
+        printf("%d \t",stck[i]);
+    }
+}
+void main()
+{
+    int stck[STACK_SIZE];
+    int top=-1;
+    int choice,ele;
+    while(1)
+    {
+        printf("\n\n1.PUSH\n2.POP\n3.Display\nEnter the Choice: ");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1: printf("Enter an element to be inserted ");
+                    scanf("%d",&ele);
+                    push(&top,stck,ele);
+                    break;
+            case 2: ele=pop(&top,stck);
+                    if(ele==-1)
+                    {
+                        break;
+                    }
+                    printf("Element Deleted is %d ",ele);
+                    break;
+            case 3: display(&top,stck);
+                    break;
+            default:printf("Enter the valid choice\n");
+                    break;
+        }
+    }
+}
