@@ -1,0 +1,131 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int value;
+    struct node *next;
+};
+typedef struct node *NODE;
+
+NODE getnode() {
+    NODE ptr;
+    ptr = (NODE)malloc(sizeof(struct node));
+    if (ptr == NULL) {
+        printf("Memory is not allocated");
+        return NULL;
+    }
+    return ptr;
+}
+
+NODE insert_beg(NODE first, int item) {
+    NODE new;
+    new = getnode();
+    new->value = item;
+    new->next = NULL;
+    if (first == NULL) {
+        return new;
+    }
+    new->next = first;
+    return new;
+}
+NODE del_beg(NODE first) {
+    if (first == NULL) {
+        printf("Linked list is empty\n");
+        return NULL;
+    }
+    NODE temp;
+    temp = first;
+    first = temp->next;
+    free(temp);
+    return first;
+}
+void display(NODE first) {
+    NODE temp;
+    if (first == NULL) {
+        printf("Linked list is empty\n");
+        return;
+    }
+    temp = first;
+    while (temp != NULL) {
+        printf("%d\t", temp->value);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+NODE insert_end(NODE first, int item) {
+    NODE new_end, current;
+    new_end = getnode();
+    new_end->value = item;
+    new_end->next = NULL;
+
+    if (first == NULL) {
+        return new_end;
+    }
+    current = first;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+    current->next = new_end;
+    return first;
+}
+int main() {
+    NODE first;
+    first = NULL;
+    int choice, val;
+    do {
+        printf("STACK IMPLEMENTATION\n");
+        printf("1. Push\n");
+        printf("2. Pop\n");
+        printf("3. Display\n");
+        printf("4.Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1:
+                printf("Enter the value to be inserted: ");
+                scanf("%d", &val);
+                first = insert_beg(first, val);
+                break;
+            case 2:
+                first = del_beg(first);
+                break;
+            case 3:
+                display(first);
+                break;
+            default:
+                printf("Enter a valid choice\n");
+                break;
+        }}while( choice!=4);
+        first=NULL;
+        while (1) {
+        printf("QUEUE IMPLEMENTATION\n");
+        printf("1. Insert\n");
+        printf("2. Delete\n");
+        printf("3. Display\n");
+        printf("4.Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1:
+                printf("Enter the value to be inserted: ");
+                scanf("%d", &val);
+                first = insert_end(first, val);
+                break;
+            case 2:
+                first = del_beg(first);
+                break;
+            case 3:
+                display(first);
+                break;
+            case 4: exit(0);
+            default:
+                printf("Enter a valid choice\n");
+                break;
+        }
+
+
+    }
+    return 0;
+}
+
